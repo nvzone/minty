@@ -3,6 +3,7 @@ local v = require "minty.shades.state"
 local redraw = require("volt").redraw
 local ui = require "volt.ui"
 local config = require("minty").config.shades
+local icons = require("minty").icons
 local shadesapi  = require("minty.shades.api")
 local g = vim.g
 
@@ -17,6 +18,8 @@ M.tabs = function()
 
     local mark = ui.checkbox {
       txt = name,
+      check = icons.checked,
+      uncheck = icons.unchecked,
       active = g.nvmark_hovered == hover_name or v.mode == name,
       actions = {
         hover = { id = hover_name, redraw = "tabs" },
@@ -106,7 +109,7 @@ M.intensity = function()
       { "         " },
 
       {
-        "",
+        icons.up,
         v.palette_cols == 12 and "Function" or "LineNr",
         function()
           update_palette_cols(12)
@@ -116,7 +119,7 @@ M.intensity = function()
       { "  " },
 
       {
-        "",
+        icons.down,
         v.palette_cols == 6 and "Function" or "LineNr",
         function()
           update_palette_cols(6)
@@ -177,16 +180,16 @@ M.footer = function()
       underline,
       gen_padding(6),
       { "│", borderhl, save_color },
-      { " 󰆓 Save ", "Function", save_color },
+      { " "..icons.save.." Save ", "Function", save_color },
       { "│", borderhl, save_color },
     },
 
     {
-      { "󱓻 ", "hex1" },
+      { icons.square.." ", "hex1" },
       { "#" .. v.hex },
       space,
       space,
-      { "󱓻 ", "hex2" },
+      { icons.square.." ", "hex2" },
       { "#" .. v.new_hex },
       gen_padding(6),
       { "└" .. string.rep("─", 8) .. "┘", borderhl, save_color },

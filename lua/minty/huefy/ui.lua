@@ -8,6 +8,7 @@ local change_saturation = require("volt.color").change_hex_saturation
 local ui = require "volt.ui"
 local hex2complementary = require("volt.color").hex2complementary
 local config = require("minty").config.huefy
+local icons = require("minty").icons
 local huefyapi = require "minty.huefy.api"
 local g = vim.g
 
@@ -90,7 +91,7 @@ M.hue = function()
       { string.rep(" ", 10) },
 
       {
-        "",
+        icons.up,
         "Function",
         function()
           v.hue_intensity = v.hue_intensity + 1
@@ -101,7 +102,7 @@ M.hue = function()
       { "  " },
 
       {
-        "",
+        icons.down,
         "Comment",
         function()
           v.hue_intensity = v.hue_intensity - 1
@@ -156,16 +157,16 @@ M.footer = function()
       underline,
       gen_padding(6),
       { "│", borderhl, save_color },
-      { " 󰆓 Save ", "Normal", save_color },
+      { " "..icons.save.." Save ", "Normal", save_color },
       { "│", borderhl, save_color },
     },
 
     {
-      { "󱓻 ", "hex1" },
+      { icons.square.." ", "hex1" },
       { "#" .. v.hex },
       space,
       space,
-      { "󱓻 ", "hex2" },
+      { icons.square.." ", "hex2" },
       { "#" .. v.new_hex },
       gen_padding(6),
       { "└" .. string.rep("─", 8) .. "┘", borderhl, save_color },
@@ -221,12 +222,14 @@ M.saturation_slider = function()
     {},
 
     {
-      { "󰌁  Saturation" },
+      { icons.saturation.."  Saturation" },
 
       { string.rep(" ", 14) },
 
       ui.checkbox {
         txt = "Invert",
+        check = icons.checked,
+        uncheck = icons.unchecked,
         active = g.nvmark_hovered == "invert_checkbox" or v.saturation_mode == "vibrant",
         actions = {
           click = function()
@@ -241,6 +244,7 @@ M.saturation_slider = function()
 
     ui.slider.config {
       w = v.tools_with_pad,
+      thumb_icon = icons.slider_thumb,
       val = v.sliders.saturation,
       hlon = "Normal",
       ratio_txt = false,
@@ -264,12 +268,14 @@ M.lightness_slider = function()
     {},
 
     {
-      { "󰖨  Lightness" },
+      { icons.lightness.."  Lightness" },
 
       { string.rep(" ", 15) },
 
       ui.checkbox {
         txt = "Darken",
+        check = icons.checked,
+        uncheck = icons.unchecked,
         active = g.nvmark_hovered == "darken_checkbox" or v.lightness_mode == "dark",
         actions = {
           hover = { id = "darken_checkbox", redraw = "lightness_slider" },
@@ -283,6 +289,7 @@ M.lightness_slider = function()
 
     ui.slider.config {
       w = v.tools_with_pad,
+      thumb_icon = icons.slider_thumb,
       val = v.sliders.lightness,
       hlon = "Normal",
       ratio_txt = false,
@@ -308,7 +315,7 @@ M.suggested_colors = function()
     local hovered = g.nvmark_hovered == hover_id
 
     local virt_text = {
-      hovered and "" or "󱓻",
+      hovered and icons.empty_square or icons.square,
       hlgroup,
       {
         hover = { id = hover_id, redraw = "suggested_colors" },
@@ -333,7 +340,7 @@ M.suggested_colors = function()
 
   return {
     {},
-    { { "󱥚  Complementary Colors" } },
+    { { icons.complementary.."  Complementary Colors" } },
     separator,
 
     line1,

@@ -7,6 +7,7 @@ local redraw = require("volt").redraw
 local layout = require "minty.shades.layout"
 local volt = require "volt"
 local config = require("minty").config.shades
+local icons = require("minty").icons
 local shadesapi = require "minty.shades.api"
 local map = vim.keymap.set
 
@@ -37,7 +38,7 @@ M.open = function()
     relative = "cursor",
     style = "minimal",
     border = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃" },
-    title = { { " 󱥚 Color Shades ", "ExBlack3bg" } },
+    title = { { " "..icons.title.."  Color Shades ", "ExBlack3bg" } },
     title_pos = "center",
   })
 

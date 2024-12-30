@@ -21,6 +21,7 @@ v.toolsNS = api.nvim_create_namespace "HuefyTools"
 M.open = function()
   local oldwin = api.nvim_get_current_win()
   local config = require("minty").config.huefy
+  local icons = require("minty").icons
 
   local border = config.border
   v.xpad = border and 2 or 1
@@ -66,7 +67,7 @@ M.open = function()
     relative = "cursor",
     style = "minimal",
     border = "single",
-    title = { { " 󱥚  Color picker ", border and "lazyh1" or "ExBlack3bg" } },
+    title = { { " "..icons.title.."  Color picker ", border and "lazyh1" or "ExBlack3bg" } },
     title_pos = "center",
   })
 
