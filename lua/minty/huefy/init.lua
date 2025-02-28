@@ -109,6 +109,9 @@ M.open = function()
   if border then
     api.nvim_set_hl(v.paletteNS, "FloatBorder", { link = "Comment" })
     api.nvim_set_hl(v.toolsNS, "FloatBorder", { link = "Comment" })
+    api.nvim_set_hl(v.paletteNS, "normal", { link = "normal" })
+    api.nvim_set_hl(v.toolsNS, "normal", { link = "normal" })
+    api.nvim_set_hl(v.inputNS, "normal", { link = "normal" })
   else
     api.nvim_set_hl(v.paletteNS, "FloatBorder", { link = "ExDarkBorder" })
     api.nvim_set_hl(v.paletteNS, "Normal", { link = "ExDarkBg" })
