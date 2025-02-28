@@ -33,9 +33,9 @@ M.open = function()
     if config.position == "cursor" then
       return { 1, 0 }
     elseif config.position == "center" then
-      return { (vim.o.lines / 2) - (h-1/ 2), vim.o.columns / 2 - v.w / 2 }
+      return { (vim.o.lines / 2) - (h - 1 / 2), vim.o.columns / 2 - v.w / 2 }
     else
-      return config.position(v.w, h-1)
+      return config.position(v.w, h - 1)
     end
   end)()
 
@@ -76,6 +76,9 @@ M.open = function()
 
   api.nvim_set_current_win(input_win)
   vim.cmd "startinsert"
+  vim.schedule(function()
+    api.nvim_set_current_win(win)
+  end)
 
   volt.run(v.buf, { h = h, w = v.w })
   require("volt.events").add(v.buf)

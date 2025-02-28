@@ -123,6 +123,9 @@ M.open = function()
 
   api.nvim_set_current_win(input_win)
   vim.cmd "startinsert"
+  vim.schedule(function()
+    api.nvim_set_current_win(win)
+  end)
 
   volt.run(v.palette_buf, { h = h, w = v.w })
   volt.run(v.tools_buf, { h = tools_h, w = v.w })
