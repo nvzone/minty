@@ -47,7 +47,7 @@ M.open = function()
     relative = config.position == "cursor" and "cursor" or "editor",
     style = "minimal",
     border = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃" },
-    title = { { " 󱥚 Color Shades ", "ExBlack3bg" } },
+    title = { { " 󱥚 Color Shades ", "pmenusel" } },
     title_pos = "center",
   })
 
