@@ -56,14 +56,22 @@ M.open = function()
     fallback_col = -(cur_pos[1] - kekw)
   end
 
+  local left_win_pos = (function()
+    if config.position == "cursor" then
+      return { 1, fallback_col or 1 }
+    elseif config.position == "center" then
+      return { (vim.o.lines / 2) - (h / 2), vim.o.columns / 2 - v.w }
+    else
+      return config.position(v.w, h)
+    end
+  end)()
+
   local win = api.nvim_open_win(v.palette_buf, true, {
-    row = 1,
-    col = fallback_col or 1,
-    -- row = (vim.o.lines / 2) / 2,
-    -- col = vim.o.columns / 5,
+    row = left_win_pos[1],
+    col = left_win_pos[2],
     width = v.w,
     height = h,
-    relative = "cursor",
+    relative = config.position == "cursor" and "cursor" or "editor",
     style = "minimal",
     border = "single",
     title = { { " 󱥚  Color picker ", border and "lazyh1" or "ExBlack3bg" } },

@@ -14,7 +14,7 @@ end
 M.lighten_on_cursor = function(n)
   local hex = M.hex_on_cursor()
 
-  if hex:match "^%x%x%x%x%x%x$" then
+  if hex and hex:match "^%x%x%x%x%x%x$" then
     local line = api.nvim_get_current_line()
     local new_hex = lighten_hex("#" .. hex, n)
     line = line:gsub(hex, new_hex:sub(2))

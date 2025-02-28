@@ -45,6 +45,8 @@ CONTENTS                                                      *minty.contents*
      mappings = function(bufs) -- bufs is a table cuz 2 bufs!
         -- add your mappings here ( buffer scoped )
      end
+    -- func must return { row, col }
+    position = "cursor", -- cursor | center | func(w, h)
    },
 
   shades = {
@@ -54,6 +56,8 @@ CONTENTS                                                      *minty.contents*
       -- local api = require("minty.shades.api")
       -- vim.keymap.set("n", "s", api.save_color, { buffer = buf })
     end
+    -- func must return { row, col }
+    position = "cursor", -- cursor | center | func(w, h)
     },
  }
 <

@@ -29,12 +29,22 @@ M.open = function()
 
   local h = mark_state[v.buf].h
 
+  local left_win_pos = (function()
+    if config.position == "cursor" then
+      return { 1, 0 }
+    elseif config.position == "center" then
+      return { (vim.o.lines / 2) - (h-1/ 2), vim.o.columns / 2 - v.w / 2 }
+    else
+      return config.position(v.w, h-1)
+    end
+  end)()
+
   local win = api.nvim_open_win(v.buf, true, {
-    row = 1,
-    col = 0,
+    row = left_win_pos[1],
+    col = left_win_pos[2],
     width = v.w,
     height = h,
-    relative = "cursor",
+    relative = config.position == "cursor" and "cursor" or "editor",
     style = "minimal",
     border = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃" },
     title = { { " 󱥚 Color Shades ", "ExBlack3bg" } },
